@@ -21,11 +21,13 @@ El webhook deberá mostrar el body enviado y la IP del NAT-Gateway, no de la lam
 
 1.  Ajusta la variable de entorno WEBHOOK_URL a el webhook que creaste
 2.  Ajusta la variable de entorno LAMBDA_MOOD a "api"
+3.  Ajusta la variable de entorno GIN_MODE a "release"
 ```bash
-$ export WEBHOOK_URL="https://webhook.site/<your-uuid>"
-$ export LAMBDA_MOOD="api"
+$ WEBHOOK_URL="https://webhook.site/<your-uuid>"
+$ LAMBDA_MOOD="api"
+$ GIN_MODE="release"
 ```
-3. Desplegar este script en una lambda como Zip
+4. Desplegar este script en una lambda como Zip
 ```bash
 $ GOOS=linux GOARCH=arm64 go build -o bootstrap main.go
 $ zip bootstrap.zip bootstrap
@@ -42,7 +44,8 @@ reciba la NAT-Gateway sea redirijida a la lambda hook.
 1.  ajusta la variable de entorno LAMBDA_MOOD a "hook"
 
 ```bash
-export LAMBDA_MOOD="hook"
+$ LAMBDA_MOOD="hook"
+$ GIN_MODE="release"
 ```
 
 Para probar, se deberá hacer un GET a la lambda al path /api con cualquier body, por ejemplo:
